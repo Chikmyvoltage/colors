@@ -1,2 +1,2 @@
 # colors
-Utility functions for manipulating colors and converting color spaces
+A few utilities to help with manipulating colors, converting color-spaces, and uploading twitter-emoji-equivalent emotes.
