@@ -42,7 +42,7 @@ def computeLAB(X, Y, Z):
 
 
 
-async def retrgb(hexadecimal):
+def retrgb(hexadecimal):
         r = (hexadecimal & 0xff0000) >> 16
         g = (hexadecimal & 0xff00) >> 8
         b = hexadecimal & 0xff
@@ -50,7 +50,7 @@ async def retrgb(hexadecimal):
 
 
 
-async def computeMSE(R, G, B):
+def computeMSE(R, G, B):
         closest = 0xff
         ch = None
         for (r, g, b), value in clrsd.items():
