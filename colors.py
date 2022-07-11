@@ -42,7 +42,7 @@ def computeLAB(X, Y, Z):
 
 
 
-def retrgb(hexadecimal):
+def retrgb(hexadecimal: int):
         r = (hexadecimal & 0xff0000) >> 16
         g = (hexadecimal & 0xff00) >> 8
         b = hexadecimal & 0xff
@@ -98,10 +98,9 @@ def test_color(R, G, B):
 
 
 if __name__ == "__main__":
-	import asyncio
 
 	start = perf_counter()
-	color = asyncio.run(computeMSE(233, 25, 8))
+	color = computeMSE(233, 25, 8) # Red
 	print(color)
 	print(f"Done in { round( perf_counter() - start, 4 ) }s...")
 
