@@ -1,9 +1,7 @@
 from base_colors import base
 from time 	 import perf_counter
-from cv2 	 import imencode, imread, circle
 from base64	 import encodebytes
 from rgb_map	 import clrsd
-import numpy 	 as	np
 
 #import requests
 
@@ -13,6 +11,15 @@ cf1 = lambda c: ((c + 0.055) / 1.055) ** 2.4 if c > 0.04045 else c / 12.92
 cf2 = lambda c: c ** 0.3333333333333333 if c > 0.008856 else ( 7.787 * c ) + 0.13793103448275862
 
 def computeXYZ(R, G, B):
+	"""
+	computeXYZ(R int , G int, B int)
+
+	converts an RGB color space to an XYZ color space.
+
+	All arguments must be real integers from 0-255.
+
+
+	"""
 
 	R /= 255
 	G /= 255
@@ -31,6 +38,10 @@ def computeXYZ(R, G, B):
 
 
 def computeLAB(X, Y, Z):
+	"""
+	computeLAB()
+	"""
+
 
 	X,Y,Z = map(cf2, (X,Y,Z))
 
@@ -66,8 +77,9 @@ def test_color(R, G, B):
 
     ret = False
     closest = 0xffff
-    X, Y, Z = computeXYZ(R, G, B)
-    L1, a1, b1 = computeLAB(X, Y, Z)
+#    X, Y, Z = computeXYZ(R, G, B)
+    L1, a1, b1 = computeLAB( * computeXYZ(R,G,B) )
+    print("Closest:",closest)
 
     for value, (r, g, b) in base.items():
 
@@ -75,6 +87,7 @@ def test_color(R, G, B):
 
         distance = abs(L2 - L1)  +  abs(a2 - a1)  +  abs(b2 - b1)
 
+        print(distance)
 
         if distance > closest:
             continue
@@ -102,5 +115,8 @@ if __name__ == "__main__":
 	start = perf_counter()
 	color = computeMSE(233, 25, 8) # Red
 	print(color)
+
+	retval = test_color(255, 0, 5)
+	print(retval)
 	print(f"Done in { round( perf_counter() - start, 4 ) }s...")
 
